@@ -15,6 +15,6 @@ Rails.application.routes.draw do
   
 
   get '/auth/facebook/callback', to: 'sessions#fbauth'
-  get 'auth/failure', to: redirect('http://localhost:5000/login')
+  get 'auth/failure', to: redirect('/')
 
 end
