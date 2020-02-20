@@ -31,7 +31,7 @@ gem 'omniauth-facebook'
 gem 'pry'
 gem 'thin'
 gem 'dotenv-rails'
-gem 'omniauth-rails_csrf_protection', '~> 0.1'
+gem 'omniauth-rails_csrf_protection'
 gem 'sysrandom', '~> 1.0', '>= 1.0.5'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
