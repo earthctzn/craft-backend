@@ -13,6 +13,11 @@ class ApplicationController < ActionController::API
     def logged_in?
         !!current_user
     end
+
+    def logg_in(user)
+        session[:user_id] = user.id
+        cookies["logged_in"] = true
+    end
     
     # def authenticate
     #     raise AppError::AuthenticationError if !logged_in?

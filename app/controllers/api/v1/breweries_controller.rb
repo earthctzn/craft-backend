@@ -1,8 +1,8 @@
-class Breweries < ApplicationController
+class Api::V1::BreweriesController < ApplicationController
 
     def index
         breweries = Brewery.all
-        render json: breweries status: 200
+        render json: breweries
     end
 
     def create
@@ -10,12 +10,17 @@ class Breweries < ApplicationController
         if brewery.save
             render json: brewery
         else
-            render json: {message: "error on create"}
+            render json: {errors: brewery.errors.full_messages}
         end
     end
 
     def show
         brewery = Brewery.find_by(id: params[:id])
+        if brewery
+            render json: brewery, include: [:reviews]
+        else
+            render json: {errors: brewery.errors.full_messages}
+        end
     end
     
     private

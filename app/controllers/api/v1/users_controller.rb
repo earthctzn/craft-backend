@@ -1,10 +1,9 @@
-class UsersController < ApplicationController
+class Api::V1::UsersController < ApplicationController
 
     def create
         user = User.new(user_params)
         if user.save
-            session[:user_id] = user.id
-            cookies["logged_in"] = true
+          logg_in(user)
             render json: user, except: [:password_digest]
         else
             render json: {errors: user.errors.full_messages}
