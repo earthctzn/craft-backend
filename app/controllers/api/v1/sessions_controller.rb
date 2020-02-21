@@ -4,16 +4,20 @@ class Api::V1::SessionsController < ApplicationController
     def fbauth
         user = User.from_facebook(auth)
         if user.save
-            session[:user_id] = user.id
-            cookies[:logged_in] = true
-            render json: user, except: [:password_digest]
+            logg_in(user)
+            render json: user, only: [:username]
         else
-            render json: {message: "error on fb login"}
+            render json: {errors: user.errors.full_messages}
         end
     end
 
     def create
         user = User.find_by(email: params[:email])
+        if user && user.authenticate(params[:password])
+            logg_in(user)
+            render json: user, only: [:username]
+        else
+            render json: {errors: user.errors.full_messages}
     end
 
     def logout

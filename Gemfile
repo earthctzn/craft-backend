@@ -26,13 +26,13 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'rack-cors'
 
 gem 'bcrypt'
-gem 'omniauth', '~> 1.9.0'
+gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'pry'
 gem 'thin'
 gem 'dotenv-rails'
 gem 'omniauth-rails_csrf_protection'
-gem 'sysrandom', '~> 1.0', '>= 1.0.5'
+gem 'sysrandom'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

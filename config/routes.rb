@@ -16,6 +16,6 @@ Rails.application.routes.draw do
   
  
   get '/auth/facebook/callback', to: 'sessions#fbauth'
-  get 'auth/failure', to: 'sessions#facebook_redirect'
+  get 'auth/facebook/redirect', to: 'sessions#facebook_redirect'
 
 end
