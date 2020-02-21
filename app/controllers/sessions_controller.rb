@@ -1,18 +1,28 @@
 class SessionsController < ApplicationController
 
-    def facebook_callback(auth)
-        @user = User.find_or_create_by(uid: auth['uid']) do |u|
-          u.name = auth['info']['name']
-          u.email = auth['info']['email']
-          @upass = Sysrandom.hex(32)
-          u.password = @upass
-          u.password_confirmation = @upass
+
+    def fbauth
+        user = User.from_facebook(auth)
+        if user.save
+            session[:user_id] = user.id
+            cookies[:logged_in] = true
+            render json: user, except: [:password_digest]
+        else
+            render json: {message: "error on fb login"}
         end
-        session[:user_id] = user.id
-        cookies[:logged_in] = true
-        redirect_to 'http://localhost:5000'
     end
 
+    def create
+        user = User.find_by(email: params[:email])
+    end
+
+    def logout
+        session.clear
+    end
+
+    def facebook_redirect
+        redirect_to '/auth/facebook'
+    end
 
 
     private
@@ -20,4 +30,6 @@ class SessionsController < ApplicationController
     def auth
         request.env['omniauth.auth']
     end
+
+    
 end

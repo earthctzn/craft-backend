@@ -3,18 +3,19 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :breweries only: [:index, :create]
-      resources :reviews
+      resources :breweries, only: [:index, :create, :show]
+      resources :reviews, only: [:create, :show]
+      resources :users, only: [:create]
     end
   end
 
-  
-  post 'api/v1/login' => 'sessions#login'
+ 
+  post 'api/v1/login' => 'sessions#create'
   post 'api/v1/logout' => 'sessions#logout'
   post 'api/v1/signup' => 'users#create'
   
-
+ 
   get '/auth/facebook/callback', to: 'sessions#fbauth'
-  get 'auth/failure', to: redirect('/')
+  get 'auth/failure', to: 'sessions#facebook_redirect'
 
 end
