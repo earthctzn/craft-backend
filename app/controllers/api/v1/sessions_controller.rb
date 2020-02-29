@@ -5,23 +5,31 @@ class Api::V1::SessionsController < ApplicationController
         user = User.from_facebook(auth)
         if user.save
             logg_in(user)
-            render json: user, only: [:username]
+            render json: user, status: :ok
         else
             render json: {errors: user.errors.full_messages}
         end
     end
 
     def create
-        user = User.find_by(email: params[:email])
-        if user && user.authenticate(params[:password])
+        user = User.find_by(email: params[:user][:email])
+        if user && user.authenticate(params[:user][:password])
             logg_in(user)
-            render json: user, only: [:username]
+            render json: user
         else
             render json: {errors: user.errors.full_messages}
+        end
     end
 
-    def logout
+    # def set_cookie
+    #     set_csrf_cookie
+    # end
+
+    def destroy
         session.clear
+        render json: {
+            notice: "You are logged out!"
+        }, status: :ok
     end
 
     def facebook_redirect
@@ -34,6 +42,11 @@ class Api::V1::SessionsController < ApplicationController
     def auth
         request.env['omniauth.auth']
     end
+
+
+    # def set_csrf_cookie
+    #     cookies["CSRF_TOKEN"] = form_authenticity_token
+    # end
 
     
 end

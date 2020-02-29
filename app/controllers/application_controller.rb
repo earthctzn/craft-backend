@@ -1,10 +1,10 @@
 class ApplicationController < ActionController::API
-    before_action :set_csrf_cookie
+    # before_action :set_csrf_cookie
     include ActionController::Cookies
-    include ActionController::RequestForgeryProtection
+    # include ActionController::RequestForgeryProtection
     # rescue_from AppError::AuthenticationError, with: :unauthorized
 
-    protect_from_forgery with: :exception
+    # protect_from_forgery with: :exception
 
     def current_user
         User.find_by(id: session[:user_id])
@@ -27,9 +27,5 @@ class ApplicationController < ActionController::API
         render json: {error: "You are not Authorized"}, status: 401
     end
 
-    private
-        def set_csrf_cookie
-            cookies["CSRF_TOKEN"] = form_authenticity_token
-        end
 
 end
