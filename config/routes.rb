@@ -5,11 +5,11 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :breweries, only: [:index, :create, :show]
       resources :reviews, only: [:index, :create, :show, :delete]
+      get '/user' => 'users#current_user'
+      get '/auth' => 'sessions#set_cookie'
       post '/login' => 'sessions#create'
       delete '/logout' => 'sessions#destroy'
       post '/signup' => 'users#create'
-      get '/cookiefy' => 'sessions#set_cookie'
-      
     end
   end
  

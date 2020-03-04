@@ -4,8 +4,9 @@ class Api::V1::SessionsController < ApplicationController
     def fbauth
         user = User.from_facebook(auth)
         if user.save
-            logg_in(user)
-            render json: user, status: :ok
+            session[:user_id] = user.id
+            cookies["logged_in"] = true
+            render json: user, include: [:reviews], status: :ok
         else
             render json: {errors: user.errors.full_messages}
         end
@@ -14,16 +15,31 @@ class Api::V1::SessionsController < ApplicationController
     def create
         user = User.find_by(email: params[:user][:email])
         if user && user.authenticate(params[:user][:password])
-            logg_in(user)
-            render json: user
+            session[:user_id] = user.id
+            cookies["logged_in"] = true
+            render json: user, except: [:password_digest, :uuid, :created_at, :updated_at], include: [:reviews], status: :ok
         else
             render json: {errors: user.errors.full_messages}
         end
     end
 
-    # def set_cookie
-    #     set_csrf_cookie
-    # end
+    def set_cookie
+        cookies["logged_in"] = logged_in?
+        render json: {csrf_auth_token: form_authenticity_token}
+    end
+
+    def current_user
+        user = User.find_by(id: session[:user_id])
+    end
+
+    def logout
+        authenticate
+        session.clear
+    end
+
+    def logged_in?
+        !!current_user
+    end 
 
     def destroy
         session.clear
@@ -44,9 +60,7 @@ class Api::V1::SessionsController < ApplicationController
     end
 
 
-    # def set_csrf_cookie
-    #     cookies["CSRF_TOKEN"] = form_authenticity_token
-    # end
+
 
     
 end
