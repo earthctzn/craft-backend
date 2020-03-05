@@ -16,7 +16,7 @@ class Api::V1::BreweriesController < ApplicationController
     end
 
     def show
-        brewery = Brewery.find_by(id: params[:id])
+        brewery = Brewery.find_or_create_by(brewery_params)
         if brewery
             render json: brewery, include: [:reviews]
         else

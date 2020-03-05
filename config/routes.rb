@@ -3,13 +3,18 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :breweries, only: [:index, :create, :show]
+      resources :breweries, only: [:index, :create]
       resources :reviews, only: [:index, :create, :show, :delete]
+      
       get '/user' => 'users#current_user'
       get '/auth' => 'sessions#set_cookie'
+
       post '/login' => 'sessions#create'
-      delete '/logout' => 'sessions#destroy'
+      post '/brewery' => 'breweries#show'
       post '/signup' => 'users#create'
+
+      delete '/logout' => 'sessions#destroy'
+      
     end
   end
  

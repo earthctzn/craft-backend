@@ -6,7 +6,7 @@ class Api::V1::UsersController < ApplicationController
         if user.save
             session[:user_id] = user.id
             cookies["logged_in"] = true
-          render json: user, except: [:password_digest, :uuid, :created_at, :updated_at], include: [:reviews], status: :ok
+          render json: user, except: [:password_digest, :uid, :created_at, :updated_at], include: [:reviews], status: :ok
         else
             render json: {errors: user.errors.full_messages}
         end
@@ -14,7 +14,7 @@ class Api::V1::UsersController < ApplicationController
 
     def current_user
         user = User.find_by(id: session[:user_id])
-        render json: user, except: [:password_digest, :uuid, :created_at, :updated_at], include: [:reviews], status: :ok
+        render json: user, except: [:password_digest, :uid, :created_at, :updated_at], include: [:reviews], status: :ok
         
     end
     
