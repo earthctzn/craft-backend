@@ -23,8 +23,7 @@ class Api::V1::SessionsController < ApplicationController
         end
     end
 
-    def set_cookie
-        cookies["logged_in"] = logged_in?
+    def set_token
         render json: {csrf_auth_token: form_authenticity_token}
     end
 
@@ -32,12 +31,8 @@ class Api::V1::SessionsController < ApplicationController
         user = User.find_by(id: session[:user_id])
     end
 
-    def logged_in?
-        !!current_user
-    end 
-
     def destroy
-        session.clear
+        reset_session
         cookies["logged_in"] = false
     end
 

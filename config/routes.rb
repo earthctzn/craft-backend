@@ -7,7 +7,7 @@ Rails.application.routes.draw do
       resources :reviews, only: [:index, :create, :show, :delete]
       
       get '/user' => 'users#current_user'
-      get '/auth' => 'sessions#set_cookie'
+      get '/auth' => 'sessions#set_token'
 
       post '/login' => 'sessions#create'
       post '/brewery' => 'breweries#show'

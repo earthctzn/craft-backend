@@ -10,11 +10,6 @@ class Api::V1::UsersController < ApplicationController
             render json: {errors: user.errors.full_messages}
         end
     end
-
-    def current_user
-        user = User.find_by(id: session[:user_id])
-        render json: user, except: [:password_digest, :uid, :created_at, :updated_at], include: [:reviews], status: :ok  
-    end
     
 
     private
