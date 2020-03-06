@@ -1,17 +1,5 @@
 class Api::V1::SessionsController < ApplicationController
 
-
-    def fbauth
-        user = User.from_facebook(auth)
-        if user.save
-            session[:user_id] = user.id
-            cookies["logged_in"] = true
-            render json: user, include: [:reviews], status: :ok
-        else
-            render json: {errors: user.errors.full_messages}
-        end
-    end
-
     def create
         user = User.find_by(email: params[:user][:email])
         if user && user.authenticate(params[:user][:password])
@@ -36,19 +24,26 @@ class Api::V1::SessionsController < ApplicationController
         cookies["logged_in"] = false
     end
 
-    def facebook_redirect
-        redirect_to '/auth/facebook'
-    end
+    # Facebook login stuff not required but nice add-on for later.
 
+    # def fbauth
+    #     user = User.from_facebook(auth)
+    #     byebug
+    #     if user.save
+    #         session[:user_id] = user.id
+    #         cookies["logged_in"] = true
+    #         render json: user, include: [:reviews], status: :ok
+    #     else
+    #         render json: {errors: user.errors.full_messages}
+    #     end
+    # end
 
-    private
+    # def facebook_redirect
+    #     redirect_to '/auth/facebook'
+    # end
 
-    def auth
-        request.env['omniauth.auth']
-    end
+    # def auth
+    #     request.env['omniauth.auth']
+    # end
 
-
-
-
-    
 end

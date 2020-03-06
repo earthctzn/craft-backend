@@ -9,16 +9,19 @@ Rails.application.routes.draw do
       get '/user' => 'users#current_user'
       get '/auth' => 'sessions#set_token'
 
+      # Facebook routes for later.
+      # get '/auth/facebook/callback', to: 'sessions#fbauth'
+      # get 'auth/facebook/redirect', to: 'sessions#facebook_redirect'
+
       post '/login' => 'sessions#create'
       post '/brewery' => 'breweries#show'
       post '/signup' => 'users#create'
 
       delete '/logout' => 'sessions#destroy'
-      
+
     end
   end
  
-  get '/auth/facebook/callback', to: 'sessions#fbauth'
-  get 'auth/facebook/redirect', to: 'sessions#facebook_redirect'
+
 
 end
