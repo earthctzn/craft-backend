@@ -32,20 +32,13 @@ class Api::V1::SessionsController < ApplicationController
         user = User.find_by(id: session[:user_id])
     end
 
-    def logout
-        authenticate
-        session.clear
-    end
-
     def logged_in?
         !!current_user
     end 
 
     def destroy
         session.clear
-        render json: {
-            notice: "You are logged out!"
-        }, status: :ok
+        cookies["logged_in"] = false
     end
 
     def facebook_redirect
