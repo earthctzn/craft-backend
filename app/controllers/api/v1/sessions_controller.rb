@@ -17,6 +17,7 @@ class Api::V1::SessionsController < ApplicationController
 
     def current_user
         user = User.find_by(id: session[:user_id])
+        render json: user, except: [:password_digest, :uuid, :created_at, :updated_at], include: [:reviews], status: :ok
     end
 
     def destroy
