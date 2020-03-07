@@ -4,8 +4,7 @@ class Api::V1::SessionsController < ApplicationController
         user = User.find_by(email: params[:user][:email])
         if user && user.authenticate(params[:user][:password])
             session[:user_id] = user.id
-            cookies["logged_in"] = true
-            render json: user, except: [:password_digest, :uuid, :created_at, :updated_at], include: [:reviews], status: :ok
+            render json: user, only: [:id, :username], include: [:reviews], status: :ok
         else
             render json: {errors: user.errors.full_messages}
         end
@@ -17,12 +16,13 @@ class Api::V1::SessionsController < ApplicationController
 
     def current_user
         user = User.find_by(id: session[:user_id])
-        render json: user, except: [:password_digest, :uuid, :created_at, :updated_at], include: [:reviews], status: :ok
+        if user
+            render json: user, only: [:id, :username], include: [:reviews], status: :ok
+        end
     end
 
     def destroy
         reset_session
-        cookies["logged_in"] = false
     end
 
     # Facebook login stuff not required but nice add-on for later.
@@ -32,7 +32,6 @@ class Api::V1::SessionsController < ApplicationController
     #     byebug
     #     if user.save
     #         session[:user_id] = user.id
-    #         cookies["logged_in"] = true
     #         render json: user, include: [:reviews], status: :ok
     #     else
     #         render json: {errors: user.errors.full_messages}

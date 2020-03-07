@@ -3,13 +3,13 @@ class Api::V1::BreweriesController < ApplicationController
 
     def index
         breweries = Brewery.all
-        render json: breweries, include: [:reviews]
+        render json: brewery, except: [:updated_at, :created_at], include: [:reviews]
     end
 
     def create
         brewery = Brewery.new(brewery_params)
         if brewery.save
-            render json: brewery, include: [:reviews]
+            render json: brewery, except: [:updated_at, :created_at], include: [:reviews]
         else
             render json: {errors: brewery.errors.full_messages}
         end
@@ -18,7 +18,7 @@ class Api::V1::BreweriesController < ApplicationController
     def show
         brewery = Brewery.find_or_create_by(brewery_params)
         if brewery
-            render json: brewery, include: [:reviews]
+            render json: brewery, except: [:updated_at, :created_at], include: [:reviews]
         else
             render json: {errors: brewery.errors.full_messages}
         end
