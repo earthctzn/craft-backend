@@ -1,6 +1,7 @@
 class Api::V1::SessionsController < ApplicationController
 
     def create
+        #binding.pry
         user = User.find_by(email: params[:user][:email])
         if user && user.authenticate(params[:user][:password])
             session[:user_id] = user.id
@@ -11,20 +12,22 @@ class Api::V1::SessionsController < ApplicationController
     end
 
     def set_token
-        render json: {csrf_auth_token: form_authenticity_token}
+        #binding.pry
+        auth_token = form_authenticity_token
+        render json: {csrf_auth_token: auth_token}
     end
 
-    def current_user
+    def get_user
         user = User.find_by(id: session[:user_id])
         if user
             render json: user, only: [:id, :username], include: [:reviews], status: :ok
-        else
-            render json: {errors: ["Unable to find user."] }
         end
     end
 
     def destroy
-        reset_session
+        #binding.pry
+        session[:user_id] = nil
+        #binding.pry
     end
 
     # Facebook login stuff not required but nice add-on for later.
@@ -33,7 +36,7 @@ class Api::V1::SessionsController < ApplicationController
     #     user = User.from_facebook(auth)
     #     byebug
     #     if user.save
-    #         session[:user_id] = user.id
+    #         
     #         render json: user, include: [:reviews], status: :ok
     #     else
     #         render json: {errors: user.errors.full_messages}

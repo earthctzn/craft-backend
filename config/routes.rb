@@ -6,7 +6,7 @@ Rails.application.routes.draw do
       resources :breweries, only: [:index, :create]
       resources :reviews, only: [:index, :create, :show, :delete]
       
-      get '/user' => 'sessions#current_user'
+      get '/user' => 'sessions#get_user'
       get '/auth' => 'sessions#set_token'
 
       # Facebook routes for later.

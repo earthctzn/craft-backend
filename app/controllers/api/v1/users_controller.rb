@@ -3,6 +3,7 @@ class Api::V1::UsersController < ApplicationController
     def create
         user = User.new(user_params)
         if user.save
+            #binding.pry
             session[:user_id] = user.id
             render json: user, only: [:id, :username], include: [:reviews], status: :ok
         else
