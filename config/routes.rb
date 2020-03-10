@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       # get '/auth/facebook/callback', to: 'sessions#fbauth'
       # get 'auth/facebook/redirect', to: 'sessions#facebook_redirect'
 
+      
       post '/login' => 'sessions#create'
       post '/brewery' => 'breweries#show'
       post '/signup' => 'users#create'
@@ -21,7 +22,5 @@ Rails.application.routes.draw do
 
     end
   end
- 
-
 
 end

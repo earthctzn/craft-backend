@@ -7,7 +7,11 @@ class Api::V1::ReviewsController < ApplicationController
 
     def create
         brewery = Brewery.find_or_create_by(brewery_params)
-        review = Review.new(content: review_params[:content], user_id: review_params[:user_id], brewery_id: brewery.id)
+        review = Review.new(
+            content: review_params[:content], 
+            user_id: review_params[:user_id], 
+            brewery_id: brewery.id
+        )
         if review.save
             render json: review, include: [:user], status: 200
         else
@@ -27,7 +31,11 @@ class Api::V1::ReviewsController < ApplicationController
 
     private
         def review_params
-            params.require(:review,).permit(:content, :user_id, :brewery_id)
+            params.require(:review,).permit(
+                :content, 
+                :user_id, 
+                :brewery_id
+            )
         end
 
         def brewery_params

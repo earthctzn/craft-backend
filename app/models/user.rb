@@ -16,13 +16,12 @@ class User < ApplicationRecord
     # Facebook stuff for later. 
 
     # def self.from_facebook(auth)
-    #   byebug
-    #     @user = User.find_or_create_by(uid: auth['uid']) do |u|
+    #     user = User.find_or_create_by(uid: auth['uid']) do |u|
     #       u.username = auth['info']['name']
     #       u.email = auth['info']['email']
-    #       @upass = Sysrandom.hex(32)
-    #       u.password = @upass
-    #       u.password_confirmation = @upass
+    #       upass = Sysrandom.hex(32)
+    #       u.password = upass
+    #       u.password_confirmation = upass
     #     end
     # end
   
