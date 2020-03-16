@@ -7,15 +7,15 @@ Welcome and thank you for using CRAFT!
 To run this webap locally, you will need to fork [the backend repo](https://github.com/earthctzn/craft-backend) and [the frontend repo](https://github.com/earthctzn/craft-frontend). 
 Once you have it downloaded and opened in a text editor like VSCode or Atom, you will need to install all the necessary gems to run CRAFT.
 
-NOTE: This app uses PostgreSQL for the database.
 
 To do so run:
 
 ```$ bundle install```
 
+NOTE: This app uses PostgreSQL for the database so you must have that running before starting the rails server.
+
 Once you see that it is done you can open a terminal window and type in ```rails s``` this will start up a local server listening on port 3000.
 
-Then you 
 
 ## This API was built With
 
