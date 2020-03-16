@@ -2,7 +2,7 @@ class Api::V1::ReviewsController < ApplicationController
 
     def index
         reviews = Review.all
-        render json: reviews, include: [:user]
+        render json: reviews, only: [:id, :content, :user_id], include: [:user, :brewery], status: 200
     end
 
     def create
@@ -13,7 +13,7 @@ class Api::V1::ReviewsController < ApplicationController
             brewery_id: brewery.id
         )
         if review.save
-            render json: review, include: [:user], status: 200
+            render json: review, only: [:id, :content, :user_id, :created_at], include: [:user, :brewery], status: 200
         else
             render json: {error: "Error Creating Review"}
         end
@@ -21,7 +21,7 @@ class Api::V1::ReviewsController < ApplicationController
 
     def show
         review = Review.find_by(id: params[:id])
-        render json: review, status: 200
+        render json: review, only: [:id, :content, :user_id, :created_at], include: [:user, :brewery], status: 200
     end
 
     def destroy 

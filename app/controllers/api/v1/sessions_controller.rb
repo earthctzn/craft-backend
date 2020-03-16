@@ -26,6 +26,21 @@ class Api::V1::SessionsController < ApplicationController
         session.clear
     end
 
+
+    
+end
+
+
+
+
+
+
+
+
+
+
+
+
     # Facebook login stuff not required but nice add-on for later.
 
     # def fbauth
@@ -45,4 +60,3 @@ class Api::V1::SessionsController < ApplicationController
     #     request.env['omniauth.auth']
     # end
 
-end
