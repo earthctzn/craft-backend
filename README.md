@@ -4,7 +4,7 @@ Welcome and thank you for using CRAFT!
 
 ## Getting Started
 
-To run this webap locally, you will need to fork [the backend repo](https://github.com/earthctzn/craft-backend) and [the frontend repo](https://github.com/earthctzn/craft-frontend). 
+To run this webapp locally, you will need to fork [the backend repo](https://github.com/earthctzn/craft-backend) and [the frontend repo](https://github.com/earthctzn/craft-frontend). 
 Once you have it downloaded and opened in a text editor like VSCode or Atom, you will need to install all the necessary gems to run CRAFT.
 
 
