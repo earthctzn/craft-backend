@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.6.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0.1'
+gem 'rails', '~> 6.0.2.2'
 
 gem 'pg'
 # Use Puma as the app server
@@ -25,7 +25,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
 gem 'bcrypt'
-gem 'omniauth'
+gem 'omniauth', '>= 1.9.1'
 gem 'omniauth-facebook'
 gem 'thin'
 gem 'dotenv-rails'
