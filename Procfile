@@ -1,2 +1,2 @@
-web: bundle exec rails s
-release: bundle exec bin/rake db:migrate
+web: rails s
+release: rails db:migrate
