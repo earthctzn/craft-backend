@@ -3,7 +3,7 @@ class Api::V1::BreweriesController < ApplicationController
 
     def index
         breweries = Brewery.all
-        render json: brewery, except: [:updated_at, :created_at], include: [:reviews]
+        render json: breweries, except: [:updated_at, :created_at], include: [:reviews]
     end
 
     def create
