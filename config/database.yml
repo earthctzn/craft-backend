@@ -32,5 +32,5 @@ test:
 production:
   database: postgresql
   encoding: unicode
-  database: <%= ENV ['DATABASE_URL'] %>
+  database: <%= ENV['DATABASE_URL'] %>
 
