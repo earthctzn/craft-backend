@@ -29,3 +29,8 @@ test:
   pool: 5
   timeout: 5000
 
+production:
+  database: postgresql
+  encoding: unicode
+  database: <%= ENV ['DATABASE_URL'] %>
+
