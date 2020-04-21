@@ -1,3 +1,3 @@
-# class AppError::AuthenticationError < StandardError
+class AuthError::AuthenticationError < StandardError
 
-# end
+end
