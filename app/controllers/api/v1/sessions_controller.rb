@@ -31,32 +31,19 @@ class Api::V1::SessionsController < ApplicationController
 end
 
 
-
-
-
-
-
-
-
-
-
-
     # Facebook login stuff not required but nice add-on for later.
 
-    # def fbauth
-    #     user = User.from_facebook(auth)
-    #     if user
-    #         render json: user, only: [:id, :username], include: [:reviews], status: :ok
-    #     else
-    #         render json: {errors: user.errors.full_messages}
-    #     end
-    # end
+    def fbauth
+        user = User.from_facebook(auth)
+        if user
+            render json: user, only: [:id, :username], include: [:reviews], status: :ok
+        else
+            render json: {errors: user.errors.full_messages}
+        end
+    end
 
-    # def facebook_redirect
-    #     redirect_to '/auth/facebook'
-    # end
 
-    # def auth
-    #     request.env['omniauth.auth']
-    # end
+    def auth
+        request.env['omniauth.auth']
+    end
 

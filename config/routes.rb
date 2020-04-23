@@ -10,8 +10,8 @@ Rails.application.routes.draw do
       get '/auth' => 'sessions#set_token'
 
       # Facebook routes for later.
-      # get '/auth/facebook/callback', to: 'sessions#fbauth'
-      # get 'auth/facebook/redirect', to: 'sessions#facebook_redirect'
+      get '/auth/facebook/callback', to: 'sessions#fbauth'
+      get 'auth/failure', to: redirect('/')
 
       
       post '/login' => 'sessions#create'
