@@ -8,7 +8,7 @@ Rails.application.config.action_controller.forgery_protection_origin_check = fal
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'https://craftbrew.netlify.app', 'https://craft-brew.herokuapp.com'
+    origins 'https://craft-brew.herokuapp.com'
 
     resource '*',
       headers: :any,
