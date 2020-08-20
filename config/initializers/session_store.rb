@@ -1,1 +1,1 @@
-Rails.application.config.session_store :cookie_store, key: '5410111a6fb2c16d7d15a4b35cb73fec25f6b908847eac42a9e92321ae677a5f1a7c5200a5cc637dc876977edf90cf454b9e714cb23d0369ff60c555eb6ebdf1', SameSite=Lax, secure: Rails.env.production?
+Rails.application.config.session_store :cookie_store, key: '5410111a6fb2c16d7d15a4b35cb73fec25f6b908847eac42a9e92321ae677a5f1a7c5200a5cc637dc876977edf90cf454b9e714cb23d0369ff60c555eb6ebdf1', secure: Rails.env.production?
