@@ -4,7 +4,7 @@ class Api::V1::UsersController < ApplicationController
         user = User.new(user_params)
         if user.save
             session[:user_id] = user.id
-            render json: user, only: [:id, :username], status: :ok
+            render json: user, only: [:id, :username], status: 200
         else
             render json: {errors: user.errors.full_messages}
         end
@@ -17,8 +17,7 @@ class Api::V1::UsersController < ApplicationController
             :username, 
             :email, 
             :password, 
-            :password_confirmation, 
-            :uid
+            :password_confirmation
         )
     end
 end
