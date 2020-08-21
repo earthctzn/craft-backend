@@ -28,8 +28,7 @@ class Api::V1::BreweriesController < ApplicationController
     
     def brewery_params
         params.require(:brewery).permit(
-            :name, 
-            :brewery,
+            :name,
             :brewery_type,
             :street,
             :city,
