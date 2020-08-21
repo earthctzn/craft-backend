@@ -4,9 +4,8 @@
 # Handle Cross-Origin Resource Sharing (CORS) in order to accept cross-origin AJAX requests.
 
 # Read more: https://github.com/cyu/rack-cors
-Rails.application.config.session_store :cookie_store, secure: Rails.env.production?
 Rails.application.config.action_controller.forgery_protection_origin_check = false
-
+# , 'http://localhost:3001'
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     origins 'https://craft-brew.herokuapp.com'
