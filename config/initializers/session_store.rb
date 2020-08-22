@@ -1,1 +1,1 @@
-Rails.application.config.session_store :cookie_store, key: '[[secret_key_base]]', same_site: :none, secure: true
+Rails.application.config.session_store :cookie_store, key: '[[key_base]]', same_site: :none, secure: true
