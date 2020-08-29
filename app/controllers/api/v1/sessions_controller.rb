@@ -6,7 +6,7 @@ class Api::V1::SessionsController < ApplicationController
             session[:user_id] = user.id
             render json: user, only: [:id, :username], include: [:reviews], status: :ok
         else
-            render json: {errors: ["Unable to log in. Please try again."] }
+            render json: {errors: user.errors.full_messages }
         end
     end
 
@@ -19,6 +19,8 @@ class Api::V1::SessionsController < ApplicationController
         user = User.find_by(id: session[:user_id])
         if user
             render json: user, only: [:id, :username], include: [:reviews], status: :ok
+        else
+            render json: {errors: user.errors.full_messages }
         end
     end
 
